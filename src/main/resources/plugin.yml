@@ -1,0 +1,9 @@
+name: ConversionPlugin
+version: ${project.version}
+main: uk.buildtheearth.conversionplugin.ConversionPlugin
+authors: [BuildTheEarthUK]
+description: Conversion Plugin
+website: www.buildtheearth.com
+commands:
+  convert:
+    description: big peepee
