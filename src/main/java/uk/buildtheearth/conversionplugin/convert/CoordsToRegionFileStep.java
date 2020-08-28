@@ -12,19 +12,23 @@ public class CoordsToRegionFileStep extends ObservableStep<WorldConversionJob> {
 
     @Override
     public StepContext run(StepContext context) throws StepFailedException {
-        int x = toRegionCoords(context.getValue("x"));
-        int z = toRegionCoords(context.getValue("z"));
+        int x = toRegionCoord(context.getValue("x"));
+        int z = toRegionCoord(context.getValue("z"));
         context.updateValue("translated_x", x);
         context.updateValue("translated_z", z);
         context.updateValue("region_file", toRegionFile(x, z));
         return context;
     }
 
-    private int toRegionCoords(int value) {
+    private int toChunkCoord(int value) {
+        return Math.floorDiv(value, 16);
+    }
+
+    private int toRegionCoord(int value) {
          return value >> 5;
     }
 
     private String toRegionFile(int translated_x, int translated_z) {
-        return String.format("");
+        return String.format("r.%d.%d.mca", translated_x, translated_z);
     }
 }
