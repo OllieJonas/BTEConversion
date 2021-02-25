@@ -42,6 +42,6 @@ public class SimpleJobScheduler implements JobScheduler {
         }
 
         bukkitScheduler.runTaskAsynchronously(plugin, job::run);
-        blockingJobs.remove(name);
+        // blockingJobs.remove(name);
     }
 }

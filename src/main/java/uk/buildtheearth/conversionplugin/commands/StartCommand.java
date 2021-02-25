@@ -5,29 +5,33 @@ import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import uk.buildtheearth.conversionplugin.ConversionPlugin;
-import uk.buildtheearth.conversionplugin.commands.meta.CommandContext;
-import uk.buildtheearth.conversionplugin.commands.meta.ICommand;
+import uk.buildtheearth.conversionplugin.commands.meta.CommandInfo;
+import uk.buildtheearth.conversionplugin.commands.meta.SubCommand;
 import uk.buildtheearth.conversionplugin.convert.WorldConversionJob;
 import uk.buildtheearth.conversionplugin.job.excep.JobSchedulerException;
 import uk.buildtheearth.conversionplugin.job.excep.JobFailedException;
 import uk.buildtheearth.conversionplugin.util.ClassUtils;
 
 
-public class StartCommand implements ICommand {
+public class StartCommand extends SubCommand<ConvertCommand> {
+
+    public StartCommand(ConvertCommand root) {
+        super(root);
+    }
 
     @Override
-    public CommandContext context() {
-        return CommandContext.builder()
+    public CommandInfo supplyInfo() {
+        return CommandInfo.builder()
                 .name("start")
                 .description("Start conversion")
                 .permission("conversion.convert.start")
                 .usage("start <x> <z>")
-                .range(CommandContext.ArgRange.of(0, 2))
+                .range(CommandInfo.ArgRange.of(2, 2))
                 .build();
     }
 
     @Override
-    public boolean executePlayer(Player player, String[] args) {
+    public void executePlayer(Player player, String[] args) {
         Integer x = ClassUtils.stringToClass(args[0], Integer.class);
         Integer z = ClassUtils.stringToClass(args[1], Integer.class);
 
@@ -41,9 +45,9 @@ public class StartCommand implements ICommand {
                 e.printStackTrace();
             }
         }
-        return false;
     }
 
+    @SuppressWarnings("unused")
     @AllArgsConstructor @Getter
     private static class SimpleRange {
         private final int x;

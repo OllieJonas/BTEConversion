@@ -3,7 +3,6 @@ package uk.buildtheearth.conversionplugin.commands.meta;
 import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import uk.buildtheearth.conversionplugin.commands.ConvertCommand;
 
 @UtilityClass
 public class CommandUtil {
@@ -23,12 +22,12 @@ public class CommandUtil {
     }
 
 
-    public boolean sendHelp(CommandSender sender, ConvertCommand command) {
+    public boolean sendHelp(CommandSender sender, RootCommand<?> command) {
         command.getCommands().values().forEach(c -> sender.sendMessage(formattedHelp(c)));
         return false;
     }
 
-    private String formattedHelp(ICommand command) {
-        return String.format(ChatColor.translateAlternateColorCodes('&', "&6%s &8- &e%s"), command.context().getName(), command.context().getDescription());
+    private String formattedHelp(SubCommand command) {
+        return String.format(ChatColor.translateAlternateColorCodes('&', "&6%s &8- &e%s"), command.getInfo().getName(), command.getInfo().getDescription());
     }
 }

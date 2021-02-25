@@ -20,7 +20,7 @@ public final class ConversionPlugin extends JavaPlugin {
         jobScheduler = new SimpleJobScheduler(this, 15);
         guiManager = new ProgressGUIManager(this);
 
-        this.getCommand("convert").setExecutor(new ConvertCommand("convert", this));
+        this.getCommand("convert").setExecutor(new ConvertCommand(this));
     }
 
     @Override

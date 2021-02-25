@@ -1,9 +1,6 @@
 package uk.buildtheearth.conversionplugin.util;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -73,7 +70,8 @@ public class ItemStackBuilder {
     @SafeVarargs
     public final <T extends ItemMeta> ItemStackBuilder metaEntries(Class<T> clazz, Consumer<T>... entries) {
         if (!clazz.isInstance(meta)) return this;
-        meta.(entries).stream().map(e -> CustomMetaEntry.of(clazz, e)).collect(Collectors.toSet());
+        // (entries).stream().map(e -> CustomMetaEntry.of(clazz, e)).collect(Collectors.toSet());
+
         return this;
     }
 
@@ -103,7 +101,7 @@ public class ItemStackBuilder {
             ClassUtils.checkCanCast(meta, metaClazz);
 
             T customMeta = (T) metaClazz.cast(meta);
-            metaEntries.stream().map(CustomMetaEntry::getConsumer).forEach(c -> c.accept(customMeta));
+            // metaEntries.stream().map(CustomMetaEntry::getConsumer).forEach(c -> c.accept(customMeta));
         }
 
         return item;

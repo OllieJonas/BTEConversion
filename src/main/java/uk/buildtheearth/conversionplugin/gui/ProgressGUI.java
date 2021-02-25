@@ -4,10 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.inventory.Inventory;
 import uk.buildtheearth.conversionplugin.job.step.Step;
+import uk.buildtheearth.conversionplugin.util.ChestGUIUtils;
 
 import java.util.Vector;
-
-import static uk.buildtheearth.conversionplugin.util.ChestGUIUtils.calculateInventorySize;
 
 public class ProgressGUI {
 
@@ -24,7 +23,7 @@ public class ProgressGUI {
         this.name = name;
         this.slotsRequired = slotsRequired;
 
-        this.invSize = calculateInventorySize(slotsRequired);
+        this.invSize = ChestGUIUtils.calculateInventorySize(slotsRequired);
         this.inventory = Bukkit.createInventory(null, invSize, name);
         this.currStep = 0;
     }
